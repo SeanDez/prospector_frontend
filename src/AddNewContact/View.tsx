@@ -11,6 +11,7 @@ export default (props: any) => {
   const [lastName, setLastName] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [employeeRoleCode, setEmployeeRoleCode] = useState('');
+  const [email, setEmail] = useState('')
 
   const [introSentenceBody, setIntroSentenceBody] = useState('');
   const [introSentencePrefix, setIntroSentencePrefix] = useState('');
@@ -25,7 +26,7 @@ export default (props: any) => {
 
   // update derived state whenever there is a change to raw input
   useEffect(() => {
-    splitRawInputIntoDerivedState(rawInputString, setFirstName, setLastName, setCompanyName, setEmployeeRoleCode, setIntroSentenceBody);
+    splitRawInputIntoDerivedState(rawInputString, setFirstName, setLastName, setCompanyName, setEmployeeRoleCode, setEmail, setIntroSentenceBody);
   }, [rawInputString])
 
   // update complete sentence on state changes
@@ -41,6 +42,7 @@ export default (props: any) => {
         lastName={lastName}
         companyName={companyName}
         employeeRoleCode={employeeRoleCode}
+        email={email}
         completeIntroSentence={completeIntroSentence}
       />
       <Form

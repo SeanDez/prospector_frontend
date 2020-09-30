@@ -8,6 +8,7 @@ export default (
   setLastName: Function,
   setCompanyName: Function,
   setEmployeeRoleCode: Function,
+  setEmail: Function,
   setIntroSentenceBody: Function,
 ) => {
   const inputs: string[] = rawInputString.split('  ');
@@ -16,5 +17,6 @@ export default (
   typeof inputs[1] !== 'undefined' ? setLastName(inputs[1].trim()) : setLastName('');
   typeof inputs[2] !== 'undefined' ? setCompanyName(inputs[2].trim()) : setCompanyName('');
   typeof inputs[3] !== 'undefined' ? setEmployeeRoleCode(inputs[3].trim()) : setEmployeeRoleCode('');
-  typeof inputs[4] !== 'undefined' ? setIntroSentenceBody(inputs[4].trim()) : setIntroSentenceBody('');
+  typeof inputs[4] !== 'undefined' ? setEmail(inputs[4].trim()) : setEmail('');
+  typeof inputs[5] !== 'undefined' ? setIntroSentenceBody(inputs[5].trim()) : setIntroSentenceBody('');
 }

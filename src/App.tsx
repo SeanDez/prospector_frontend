@@ -1,11 +1,11 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 
 import AddView from './AddNewContact/View';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <header className="App-header">
         <AddView />
       </header>
