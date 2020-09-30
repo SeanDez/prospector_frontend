@@ -1,0 +1,19 @@
+
+setup .gitignore
+X .env X
+X secrets X
+
+setup eslint
+X install as dev dep 
+X npx eslint --init
+
+X write initial structure
+X add  (not important for now)
+X add new and email
+X email untouched    (may not be needed)
+
+setup and link to remote on github
+
+write the form
+write the splitting function
+write the state preview
