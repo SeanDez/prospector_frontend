@@ -12,8 +12,12 @@ X add  (not important for now)
 X add new and email
 X email untouched    (may not be needed)
 
-setup and link to remote on github
+X setup and link to remote on github
 
-write the form
-write the splitting function
-write the state preview
+X write the form
+X write the splitting function
+X write the state preview
+
+create custom properties (role category, opening sentence)
+check what custom properties are there
+create custom properties if needed
