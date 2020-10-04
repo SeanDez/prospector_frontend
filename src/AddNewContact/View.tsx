@@ -12,6 +12,8 @@ export default (props: any) => {
   const [companyName, setCompanyName] = useState('');
   const [employeeRoleCode, setEmployeeRoleCode] = useState('');
   const [email, setEmail] = useState('')
+  const [contactStrategy, setContactStrategy] = useState('');
+  const [customContactChannel, setCustomContactChannel] = useState('');
 
   const [introSentenceBody, setIntroSentenceBody] = useState('');
   const [introSentencePrefix, setIntroSentencePrefix] = useState('');
@@ -19,14 +21,9 @@ export default (props: any) => {
 
   const [completeIntroSentence, setCompleteIntroSentence] = useState('');
 
-  // log every render for debugging
-  useEffect(() => {
-    console.log('completeIntroSentence.length ', completeIntroSentence.length);
-  })
-
   // update derived state whenever there is a change to raw input
   useEffect(() => {
-    splitRawInputIntoDerivedState(rawInputString, setFirstName, setLastName, setCompanyName, setEmployeeRoleCode, setEmail, setIntroSentenceBody);
+    splitRawInputIntoDerivedState(rawInputString, setFirstName, setLastName, setCompanyName, setEmployeeRoleCode, setEmail, setIntroSentenceBody, setContactStrategy, setCustomContactChannel);
   }, [rawInputString])
 
   // update complete sentence on state changes
@@ -34,6 +31,11 @@ export default (props: any) => {
     const newFullIntro = buildIntroSentence(introSentencePrefix, introSentenceBody, introSentenceSuffix);
     setCompleteIntroSentence(newFullIntro);
   }, [introSentencePrefix, introSentenceBody, introSentenceSuffix]);
+
+  // update contact strategy on state change
+  useEffect(() => {
+
+  }, [contactStrategy]);
 
   return (
     <div>
@@ -44,6 +46,8 @@ export default (props: any) => {
         employeeRoleCode={employeeRoleCode}
         email={email}
         completeIntroSentence={completeIntroSentence}
+        contactStrategy={contactStrategy}
+        customContactChannel={customContactChannel}
       />
       <Form
         setRawInputString={setRawInputString}

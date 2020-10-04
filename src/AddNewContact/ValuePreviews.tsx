@@ -8,7 +8,21 @@ const orange = { color: 'orange' };
 const purple = { color: 'purple' };
 const red = { color: 'red' };
 
-export default ({ firstName, lastName, companyName, employeeRoleCode, email,completeIntroSentence }: any) => (
+function transformContactStrategyCodeIntoLabel(contactStrategyState: string) {
+  const normalizedStrategy = contactStrategyState.trim().toLowerCase();
+
+  if (normalizedStrategy === 'ae') {
+    return 'Add & Email';
+  } else if (normalizedStrategy === 'au') {
+    return 'Add as Uncontacted';
+  } else if (normalizedStrategy === 'acm') {
+    return 'Add as Contacted via Custom Method';
+  }
+
+  else return 'Valid options: "ae", "au", or "acm"';
+}
+
+export default ({ firstName, lastName, companyName, employeeRoleCode, email,completeIntroSentence, contactStrategy, customContactChannel }: any) => (
   <OuterContainer>
     <span style={blue}>{ firstName.length > 0 && `First Name: ${firstName}` }</span>
     <span style={red}>{ lastName.length > 0 && `Last Name: ${lastName}` }</span>
@@ -18,6 +32,10 @@ export default ({ firstName, lastName, companyName, employeeRoleCode, email,comp
 
     {/* trimmed because it starts with 2 spaces due to concatenation */}
     <span style={green}>{ completeIntroSentence.trim().length > 0 && `Intro Sentence: ${completeIntroSentence}` }</span>
+
+    <span>{ contactStrategy.length > 0 && `Contact Strategy: ${transformContactStrategyCodeIntoLabel(contactStrategy)}` }</span>
+    <span>{ customContactChannel.length > 0 && `Contact Channel: ${customContactChannel}` }</span>
+
   </OuterContainer>
 )
 

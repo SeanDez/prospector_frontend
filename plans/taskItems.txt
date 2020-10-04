@@ -1,23 +1,48 @@
 
-setup .gitignore
+X setup .gitignore
 X .env X
 X secrets X
 
-setup eslint
+X setup eslint
 X install as dev dep 
 X npx eslint --init
 
-X write initial structure
+// write initial structure
 X add  (not important for now)
 X add new and email
 X email untouched    (may not be needed)
 
 X setup and link to remote on github
 
-X write the form
+// write the form
 X write the splitting function
 X write the state preview
 
-create custom properties (role category, opening sentence)
-check what custom properties are there
-create custom properties if needed
+// create custom properties (role category, opening sentence)
+X check what custom properties are there
+X create custom properties if needed
+
+
+// add contacts
+figure out what info needs to ship to back end
+create interface. include other important core details (lead status, )
+setup a fetch to back end
+on back end, setup an authed api request
+catch a positive response
+flash positive response on front end for 1-2 seconds
+attach to add button
+  focus only on the add button
+
+// send gmail
+
+
+// add email event to contact
+
+
+
+
+
+
+
+
+

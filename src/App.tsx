@@ -6,9 +6,7 @@ import CustomPropertyManager from './InitialLoad/CustomPropertyManager';
 
 function App() {
 
-  // get all properties for the account
-  // check if each custom property is there
-  // add any missing custom properties;
+  // verify or add custom properties
   useEffect(() => {
     async function wrapper() {
       const customPropertyManager = new CustomPropertyManager();
@@ -18,6 +16,8 @@ function App() {
 
     wrapper();
   }, [])
+
+  
 
   return (
     <div>
