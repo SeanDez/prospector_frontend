@@ -22,14 +22,16 @@ X write the state preview
 X check what custom properties are there
 X create custom properties if needed
 
+setup titlecasing and uppercasing
 
 // add contacts
-figure out what info needs to ship to back end
-create interface. include other important core details (lead status, )
+X figure out what info needs to ship to back end
+X create interface. include other important core details (lead status, )
 setup a fetch to back end
-on back end, setup an authed api request
-catch a positive response
+X on back end, setup an authed api request
+catch response on front end
 flash positive response on front end for 1-2 seconds
+  only if the command was given for add without email
 attach to add button
   focus only on the add button
 
@@ -39,7 +41,9 @@ attach to add button
 // add email event to contact
 
 
-
+// add contact option selections
+X add state variables
+X tie state to UI
 
 
 

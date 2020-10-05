@@ -17,8 +17,6 @@ function App() {
     wrapper();
   }, [])
 
-  
-
   return (
     <div>
       <header className="App-header">
