@@ -4,6 +4,7 @@ import buildIntroSentence from './helperFunctions/buildIntroSentence';
 import Form from './Form';
 import splitRawInputIntoDerivedState from './helperFunctions/splitRawInputIntoDerivedState';
 import ValuePreviews from './ValuePreviews';
+import Submitter from './Submission/Submitter';
 
 export default (props: any) => {
   const [rawInputString, setRawInputString] = useState('');
@@ -36,6 +37,33 @@ export default (props: any) => {
   useEffect(() => {
 
   }, [contactStrategy]);
+
+  /*
+    On CTRL + Enter, submit a fetch request to add a new contact
+    Sometimes an email is submitted
+    A popup is always displayed
+  */
+  const [flashMessages, setFlashMessages] = useState([]);
+
+  useEffect(() => {
+    document.addEventListener('keydown', (event: any) => {
+      async function asyncWrapper() {
+
+        // if keydown events perfectly match
+        if () {
+          const submitter = new Submitter(firstName, lastName, companyName, employeeRoleCode, email, completeIntroSentence, contactStrategy, customContactChannel);
+          const uiMessage = await submitter.addAndMaybeEmail(stateVar)
+          setFlashMessages(flashMessages.concat(uiMessage));
+        }
+      };
+
+      asyncWrapper();
+    });
+  }, []);
+
+  /*
+    cont
+  */
 
   return (
     <div>

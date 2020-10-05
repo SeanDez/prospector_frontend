@@ -22,7 +22,7 @@ X write the state preview
 X check what custom properties are there
 X create custom properties if needed
 
-setup titlecasing and uppercasing
+X setup titlecasing and uppercasing
 
 // add contacts
 X figure out what info needs to ship to back end
