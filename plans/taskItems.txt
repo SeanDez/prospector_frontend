@@ -31,9 +31,7 @@ setup a fetch to back end
 X on back end, setup an authed api request
 catch response on front end
 flash positive response on front end for 1-2 seconds
-  only if the command was given for add without email
-attach to add button
-  focus only on the add button
+X setup add via ctrl+enter
 
 // send gmail
 

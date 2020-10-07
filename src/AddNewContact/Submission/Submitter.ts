@@ -2,7 +2,7 @@ import 'es6-promise';
 import 'isomorphic-fetch';
 import buildUrl from 'build-url';
 
-const { REACT_APP_SERVER_URL } = process.env;
+const { REACT_APP_SERVER_URL } = process.env as { [key: string]: string };
 
 type ContactStrategies = 'ae' | 'au' | 'acm';
 
@@ -71,15 +71,21 @@ export default class Submitter {
   }
 
   private async addContact() {
+    const createUrl = buildUrl(REACT_APP_SERVER_URL, {
+      path: '/contact/new',
+    });
+
     try {
-      const response = await fetch('', {
+      const response = await fetch(createUrl, {
         method: 'post',
         headers: {
           'content-type': 'application/json'
-        }
+        },
+        body: JSON.stringify({ firstName: this.firstName, lastName: this.lastName, companyName: this.companyName, employeeRoleCode: this.employeeRoleCode, email: this.email, completeIntroSentence: this.completeIntroSentence, customContactChannel: this.customContactChannel }),
       })
   
-      const newContact = response.json()
+      const newContact = response.json();
+      console.log('newContact', newContact);
       return newContact;
     } catch (error) {
       throw new Error(error);

@@ -43,27 +43,7 @@ export default (props: any) => {
     Sometimes an email is submitted
     A popup is always displayed
   */
-  const [flashMessages, setFlashMessages] = useState([]);
-
-  useEffect(() => {
-    document.addEventListener('keydown', (event: any) => {
-      async function asyncWrapper() {
-
-        // if keydown events perfectly match
-        if () {
-          const submitter = new Submitter(firstName, lastName, companyName, employeeRoleCode, email, completeIntroSentence, contactStrategy, customContactChannel);
-          const uiMessage = await submitter.addAndMaybeEmail(stateVar)
-          setFlashMessages(flashMessages.concat(uiMessage));
-        }
-      };
-
-      asyncWrapper();
-    });
-  }, []);
-
-  /*
-    cont
-  */
+  const [flashMessage, setFlashMessage] = useState('');
 
   return (
     <div>
@@ -79,6 +59,15 @@ export default (props: any) => {
       />
       <Form
         setRawInputString={setRawInputString}
+        firstName={firstName}
+        lastName={lastName}
+        companyName={companyName}
+        employeeRoleCode={employeeRoleCode}
+        email={email}
+        completeIntroSentence={completeIntroSentence}
+        contactStrategy={contactStrategy}
+        customContactChannel={customContactChannel}
+        setFlashMessage={setFlashMessage}
       />
     </div>
   )
