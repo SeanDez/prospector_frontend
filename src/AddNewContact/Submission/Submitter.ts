@@ -16,11 +16,11 @@ export default class Submitter {
     adds contact. controls whether to send email
     returns a flash message based on path taken
   */
-  public async addAndSometimesEmail(): Promise<string> {
+  public async addAndSometimesEmail(): Promise<Partial<{ errors: string, message: string }>> {
     // ------- Vaiidation
     const validationErrors: string[] = this.validateInputs();
     if (validationErrors.length > 0) {
-      return `Error: ${validationErrors.join(". ")}`;
+      return { errors: validationErrors.join(". ") };
     }
 
     // ------- Email sending
@@ -33,23 +33,22 @@ export default class Submitter {
     // ------- Contact adding
     const addedContact = await this.addContact();
     const addedContactExists = Object.keys(addedContact).length > 0;
-    return addedContact.toString();
 
 /*
     // -------  Flash message return
     if (emailSent) {
-        return 'User added and emailed';
+        return { message: 'User added and emailed' };
       }
     } else {
       return 'User added, but failed to send email'
     if (this.contactStrategy === 'acm') {
       // this.addContactTimelineEvent(this.customContactChannel);
 
-      return `User added with timeline event indicating contacted via ${this.customContactChannel}`
+      return { message: `User added with timeline event indicating contacted via ${this.customContactChannel}` };
     }
+    */
 
-    return 'User added with no contact event';
-*/
+    return { message: 'User added to Hubspot with no contact event' };
   }
 
   // ---------------------- Internal Methods

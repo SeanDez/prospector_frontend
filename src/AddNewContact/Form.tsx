@@ -16,7 +16,7 @@ interface PropsShape {
 }
 
 export default ({ setRawInputString, setFlashMessage, firstName, lastName, companyName, employeeRoleCode, email, completeIntroSentence, contactStrategy, customContactChannel }: PropsShape) => {
-  const textAreaRef = React.useRef('');
+  const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
 
   return (
     <div>
@@ -26,7 +26,7 @@ export default ({ setRawInputString, setFlashMessage, firstName, lastName, compa
         </div>
         <div>
           <LargeTextArea
-            // ref={textAreaRef}
+            ref={textAreaRef}
             rows={8}
             placeholder="John Doe  Acme Inc  S  mrjohnfredriskdoe@acmecorpinternational.com  and I see your alma mater was in the sigma kappa epsilon fraternity and Duke state university. That's so cool, my friend went there and I love that school!  acm  Linkedin"
             onChange={(e: any) => setRawInputString(e.target.value) }
@@ -36,9 +36,10 @@ export default ({ setRawInputString, setFlashMessage, firstName, lastName, compa
                 const submitter = new Submitter(firstName, lastName, companyName, employeeRoleCode, email, completeIntroSentence, contactStrategy, customContactChannel);
                 try {
                   const uiMessage = await submitter.addAndSometimesEmail();
-                  // setFlashMessage((uiMessage));
-  
-                  // textAreaRef.current.value = '';  
+                  setFlashMessage((uiMessage));
+                  if (textAreaRef.current) {
+                    textAreaRef.current.value = '';  
+                  }
                 } catch (error) {
                   throw new Error(error);
                 }

@@ -5,6 +5,24 @@ import Form from './Form';
 import splitRawInputIntoDerivedState from './helperFunctions/splitRawInputIntoDerivedState';
 import ValuePreviews from './ValuePreviews';
 import Submitter from './Submission/Submitter';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent'
+import Alert from '@material-ui/lab/Alert';
+
+/*
+  Set a flash message for an error or message
+  Remove message after 5 secconds
+  If another flash message comes in, overwrite the previous flash message. Reset the timer
+*/
+function displayFlashMesage(flashMessage: Partial<{ errors: string, message: string }>, setFlashMessage: Function, secondsVisible: number) {
+  if ('errors' in flashMessage) {
+    return <Snackbar />
+  } else { // message key is present
+    return <Snackbar />
+  }
+}
+
+type FlashMessages = Partial<{ message?: string, errors?: string }>;
 
 export default (props: any) => {
   const [rawInputString, setRawInputString] = useState('');
@@ -38,12 +56,7 @@ export default (props: any) => {
 
   }, [contactStrategy]);
 
-  /*
-    On CTRL + Enter, submit a fetch request to add a new contact
-    Sometimes an email is submitted
-    A popup is always displayed
-  */
-  const [flashMessage, setFlashMessage] = useState('');
+  const [flashMessage, setFlashMessage] = useState<FlashMessages>({});
 
   return (
     <div>
@@ -69,6 +82,28 @@ export default (props: any) => {
         customContactChannel={customContactChannel}
         setFlashMessage={setFlashMessage}
       />
+      <Snackbar
+        open={Object.keys(flashMessage).length > 0}
+        autoHideDuration={3 * 1000}
+        onClose={() => setFlashMessage({}) }
+      >
+        <div>
+          { 'errors' in flashMessage && 
+            <Alert 
+              severity="error"
+              elevation={6}
+              variant="filled"  
+            >{flashMessage.errors}</Alert>
+          } { 'message' in flashMessage && 
+            // skipping the ternary prevents a success blip on error 
+            <Alert 
+              severity="success"
+              elevation={6}
+              variant="filled"  
+            >{flashMessage.message}</Alert>
+          }
+        </div>
+      </Snackbar>
     </div>
   )
 }
