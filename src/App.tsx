@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import './App.scss';
+import styled from 'styled-components';
 
 import AddView from './AddNewContact/View';
 import CustomPropertyManager from './InitialLoad/CustomPropertyManager';
 
 function App() {
-
   // verify or add custom properties
   useEffect(() => {
     async function wrapper() {
@@ -18,12 +17,22 @@ function App() {
   }, [])
 
   return (
-    <div>
+    <OuterContainer>
       <header className="App-header">
         <AddView />
       </header>
-    </div>
+    </OuterContainer>
   );
 }
 
 export default App;
+
+const OuterContainer = styled.div`
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 80vw;
+  
+  & * {
+    text-align: center;
+  }
+`;

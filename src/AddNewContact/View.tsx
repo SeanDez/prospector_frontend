@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 import buildIntroSentence from './helperFunctions/buildIntroSentence';
 import Form from './Form';
 import splitRawInputIntoDerivedState from './helperFunctions/splitRawInputIntoDerivedState';
 import ValuePreviews from './ValuePreviews';
-import Submitter from './Submission/Submitter';
-import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent'
-import Alert from '@material-ui/lab/Alert';
+import Instructions from './Instructions';
 
 /*
   Set a flash message for an error or message
@@ -82,6 +81,8 @@ export default (props: any) => {
         customContactChannel={customContactChannel}
         setFlashMessage={setFlashMessage}
       />
+      <Instructions />
+
       <Snackbar
         open={Object.keys(flashMessage).length > 0}
         autoHideDuration={3 * 1000}

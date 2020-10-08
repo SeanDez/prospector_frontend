@@ -21,9 +21,10 @@ export default ({ setRawInputString, setFlashMessage, firstName, lastName, compa
   return (
     <div>
       <form>
-        <div>
-          <label>All fields</label>
-        </div>
+        <FormHeader>
+          <label>Condsolidated Input Box</label>
+          <p>Order: First name, Last name, Company name, Employee Role Code (R: Recruiter, S: Sales, T: Technical/Engineer), Email address, Introductory Sentence, Contact Strategy (AE: Add and Email, AU: Add as Uncontacted, ACM: Add with Custom contact Method), Custom contact channel (optional, for ACM contact strategy only)</p>
+        </FormHeader>
         <div>
           <LargeTextArea
             ref={textAreaRef}
@@ -37,7 +38,7 @@ export default ({ setRawInputString, setFlashMessage, firstName, lastName, compa
                 try {
                   const uiMessage = await submitter.addAndSometimesEmail();
                   setFlashMessage((uiMessage));
-                  if (textAreaRef.current) {
+                  if ('message' in uiMessage && textAreaRef.current) {
                     textAreaRef.current.value = '';  
                   }
                 } catch (error) {
@@ -47,12 +48,6 @@ export default ({ setRawInputString, setFlashMessage, firstName, lastName, compa
             }}
           />
         </div>
-        <ButtonContainer>
-          <button
-            // todo function to add to hubspot and email with gmail
-          >Add and Email</button>
-          <button>Add without Emailing</button>
-        </ButtonContainer>
       </form>
     </div>
   )
@@ -60,16 +55,14 @@ export default ({ setRawInputString, setFlashMessage, firstName, lastName, compa
 
 const LargeTextArea = styled.textarea`
   margin: 30px auto;
-  border: 2px dashed purple;
-  width: 90vw;
+  border: 2px solid darkgray;
+  width: 90%;
+  max-width: 1000px;
   font-size: 1.4rem;
   line-height: 1.9rem;
 `;
 
-const ButtonContainer = styled.div`
-  margin: 0 auto;
-  /* border: 2px dotted yellow; */
-  display: flex;
+const FormHeader = styled.div`
+  margin: 3vh auto;
   width: 80vw;
-  justify-content: space-around;
 `;
