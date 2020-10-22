@@ -73,7 +73,6 @@ export default class Submitter {
     try {
       const response = await fetch(timelineUrl, {
         method: 'get',
-        mode: 'cors',
         headers: new Headers({
           'content-type': 'x-www-form-urlencoded',
         }),
@@ -94,7 +93,6 @@ export default class Submitter {
     try {
       const response = await fetch(createUrl, {
         method: 'post',
-        mode: 'cors',
         headers: {
           'content-type': 'application/json'
         },
@@ -125,7 +123,6 @@ export default class Submitter {
     try {
       const response = await fetch(emailEndpoint, {
         method: 'post',
-        mode: 'cors',
         headers: new Headers({
           'content-type': 'application/json',
 
