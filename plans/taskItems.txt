@@ -33,8 +33,14 @@ catch response on front end
 flash positive response on front end for 1-2 seconds
 X setup add via ctrl+enter
 
-// send gmail
-
+// send email
+/ setup validation (paused, requires paid plan)
+X setup message titles.
+X setup messable bodies
+x setup a closure factory
+X fix the private key
+X setup email sending on backend
+test the send method with postman after mailgun approves my domain (1-2 days)
 
 // add email event to contact
 
@@ -43,6 +49,11 @@ X setup add via ctrl+enter
 X add state variables
 X tie state to UI
 
+// login snackbar
+X setup state
+X setup state handling
+**************
+setup ui
 
 
 

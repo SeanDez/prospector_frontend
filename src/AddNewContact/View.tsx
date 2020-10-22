@@ -3,6 +3,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 
 import buildIntroSentence from './helperFunctions/buildIntroSentence';
+import CustomPropertyManager from '../InitialLoad/CustomPropertyManager';
 import Form from './Form';
 import splitRawInputIntoDerivedState from './helperFunctions/splitRawInputIntoDerivedState';
 import ValuePreviews from './ValuePreviews';
@@ -56,6 +57,18 @@ export default (props: any) => {
   }, [contactStrategy]);
 
   const [flashMessage, setFlashMessage] = useState<FlashMessages>({});
+
+
+  // verify or add custom properties
+  useEffect(() => {
+    async function wrapper() {
+      const customPropertyManager = new CustomPropertyManager();
+      const result: object[] | null = await customPropertyManager.verifyOrAddCustomProperties();
+      console.log('result of customPropertyManager.verifyOrAddCustomProperties', result);
+    }
+
+    wrapper();
+  }, []);
 
   return (
     <div>

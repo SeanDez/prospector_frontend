@@ -1,21 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import AddView from './AddNewContact/View';
-import CustomPropertyManager from './InitialLoad/CustomPropertyManager';
+import LoginBox from './LoginBox/LoginBox';
 
 function App() {
-  // verify or add custom properties
-  useEffect(() => {
-    async function wrapper() {
-      const customPropertyManager = new CustomPropertyManager();
-      const result: object[] | null = await customPropertyManager.verifyOrAddCustomProperties();
-      console.log('result of customPropertyManager.verifyOrAddCustomProperties', result);
-    }
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    wrapper();
-  }, [])
+  // login box
+  if (isLoggedIn === false) {
+    return (
+      <OuterContainer>
+        <LoginBox 
+          setIsLoggedIn={setIsLoggedIn}
+        />
+      </OuterContainer>
+    )
+  }
 
+
+  // progam view
   return (
     <OuterContainer>
       <header className="App-header">
