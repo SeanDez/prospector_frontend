@@ -17,15 +17,23 @@ export default class Submitter {
     returns a flash message based on path taken
   */
   public async addAndSometimesEmail(): Promise<string> {
-    // ------- Email sending
-    const shouldBeEmailed: boolean = this.contactStrategy === 'ae';
+    this.addToHubspot(); // nothing to await on
+
     let errorOrMessage =  [];
 
+    const shouldBeEmailed: boolean = this.contactStrategy === 'ae';
     if (shouldBeEmailed) {
-      errorOrMessage.push(await this.sendEmail());
-      // todo add contact addition to hubspot
-      // push its value too, then join and return
-      return errorOrMessage.join(' ');
+
+      try {
+        const message: string = await this.sendEmail();
+        errorOrMessage.push(message);
+        // todo add contact addition to hubspot
+        // push its value too, then join and return
+        return errorOrMessage.join(' ');
+      } catch (error) {
+        errorOrMessage.push(error);
+      }
+
     } else if (this.contactStrategy === 'acm') {
       // this.addContactTimelineEvent(this.customContactChannel);
 
@@ -54,7 +62,33 @@ export default class Submitter {
     return errorMessages;
   }
 
-  private async addContact() {
+  // todo fix this one
+  // todo figure out how to get the new contact id from hubspot
+  private async addContactTimelineEvent(channelAndContactId: string): Promise<boolean> {
+    const timelineUrl = buildUrl(REACT_APP_SERVER_URL, {
+      path: '/contact/custom-channel',
+      queryParams: {
+        // todo
+      }
+    });
+
+    try {
+      const response = await fetch(timelineUrl, {
+        method: 'get',
+        mode: 'cors',
+        headers: new Headers({
+          'content-type': 'x-www-form-urlencoded',
+        }),
+      });
+
+      if (response.ok) { return true; }
+      return false;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  private async addToHubspot() {
     const createUrl = buildUrl(REACT_APP_SERVER_URL, {
       path: '/contact/new',
     });

@@ -38,7 +38,12 @@ export default ({ setRawInputString, setFlashMessage, firstName, lastName, compa
                 try {
                   const uiMessage = await submitter.addAndSometimesEmail();
                   setFlashMessage((uiMessage));
+
+                  /* The ref is used to clear state without blipping
+                    using the state setter to force rerender clears the old ui data
+                  */
                   if (textAreaRef.current) { textAreaRef.current.value = ''; }
+                  setRawInputString('');
                 } catch (error) {
                   throw new Error(error);
                 }

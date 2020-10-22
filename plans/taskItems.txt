@@ -52,8 +52,19 @@ X tie state to UI
 // login snackbar
 X setup state
 X setup state handling
-**************
-setup ui
+X setup ui
+
+// emailing
+X setup templates
+X setup a closure factory for main functionality
+X setup front end send request
+
+// add without email
+setup
+
+
+
+
 
 
 
