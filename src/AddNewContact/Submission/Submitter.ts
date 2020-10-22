@@ -4,8 +4,6 @@ import buildUrl from 'build-url';
 
 const { REACT_APP_SERVER_URL } = process.env as { [key: string]: string };
 
-type ContactStrategies = 'ae' | 'au' | 'acm';
-
 export default class Submitter {
   constructor(
     private firstName: string, private lastName: string, private companyName: string,
@@ -96,13 +94,14 @@ export default class Submitter {
     try {
       const response = await fetch(createUrl, {
         method: 'post',
+        mode: 'cors',
         headers: {
           'content-type': 'application/json'
         },
         body: JSON.stringify({ firstName: this.firstName, lastName: this.lastName, companyName: this.companyName, employeeRoleCode: this.employeeRoleCode, email: this.email, completeIntroSentence: this.completeIntroSentence, customContactChannel: this.customContactChannel }),
       })
   
-      const newContact = response.json();
+      const newContact = await response.json();
       console.log('newContact', newContact);
       return newContact;
     } catch (error) {
