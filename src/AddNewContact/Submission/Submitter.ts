@@ -16,39 +16,24 @@ export default class Submitter {
     adds contact. controls whether to send email
     returns a flash message based on path taken
   */
-  public async addAndSometimesEmail(): Promise<Partial<{ errors: string, message: string }>> {
-    // ------- Vaiidation
-    const validationErrors: string[] = this.validateInputs();
-    if (validationErrors.length > 0) {
-      return { errors: validationErrors.join(". ") };
-    }
-
+  public async addAndSometimesEmail(): Promise<string> {
     // ------- Email sending
     const shouldBeEmailed: boolean = this.contactStrategy === 'ae';
-    let emailSent: boolean;
+    let errorOrMessage =  [];
+
     if (shouldBeEmailed) {
-      // emailSent = await this.sendEmail();
-    }
-
-    // ------- Contact adding
-    const addedContact = await this.addContact();
-    const addedContactExists = Object.keys(addedContact).length > 0;
-
-/*
-    // -------  Flash message return
-    if (emailSent) {
-        return { message: 'User added and emailed' };
-      }
-    } else {
-      return 'User added, but failed to send email'
-    if (this.contactStrategy === 'acm') {
+      errorOrMessage.push(await this.sendEmail());
+      // todo add contact addition to hubspot
+      // push its value too, then join and return
+      return errorOrMessage.join(' ');
+    } else if (this.contactStrategy === 'acm') {
       // this.addContactTimelineEvent(this.customContactChannel);
 
-      return { message: `User added with timeline event indicating contacted via ${this.customContactChannel}` };
+      return `User added with timeline event indicating contacted via ${this.customContactChannel}`;
     }
-    */
+    
 
-    return { message: 'User added to Hubspot with no contact event' };
+    return 'User added to Hubspot with no contact event';
   }
 
   // ---------------------- Internal Methods
@@ -91,7 +76,34 @@ export default class Submitter {
     }
   }
 
-  private async sendEmail() {
-    throw new Error('Method not implemented.');
+  private async sendEmail(): Promise<string> {
+    const emailEndpoint = buildUrl(REACT_APP_SERVER_URL, {
+      path: '/email/send'
+    });
+
+    const body = JSON.stringify({
+      firstName: this.firstName,
+      companyName: this.companyName,
+      email: this.email,
+      employeeRoleCode: this.employeeRoleCode,
+      completeIntroSentence: this.completeIntroSentence,
+    });
+
+    try {
+      const response = await fetch(emailEndpoint, {
+        method: 'post',
+        mode: 'cors',
+        headers: new Headers({
+          'content-type': 'application/json',
+
+        }),
+        body,
+      });
+
+      const message: string = (await response.json()).message;
+      return message;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }

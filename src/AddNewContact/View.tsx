@@ -22,8 +22,6 @@ function displayFlashMesage(flashMessage: Partial<{ errors: string, message: str
   }
 }
 
-type FlashMessages = Partial<{ message?: string, errors?: string }>;
-
 export default (props: any) => {
   const [rawInputString, setRawInputString] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -56,7 +54,7 @@ export default (props: any) => {
 
   }, [contactStrategy]);
 
-  const [flashMessage, setFlashMessage] = useState<FlashMessages>({});
+  const [flashMessage, setFlashMessage] = useState('');
 
 
   // verify or add custom properties
@@ -97,24 +95,18 @@ export default (props: any) => {
       <Instructions />
 
       <Snackbar
-        open={Object.keys(flashMessage).length > 0}
+        open={Boolean(flashMessage)}
         autoHideDuration={3 * 1000}
-        onClose={() => setFlashMessage({}) }
+        onClose={() => setFlashMessage('') }
       >
         <div>
-          { 'errors' in flashMessage && 
+          { flashMessage && 
             <Alert 
-              severity="error"
               elevation={6}
               variant="filled"  
-            >{flashMessage.errors}</Alert>
-          } { 'message' in flashMessage && 
-            // skipping the ternary prevents a success blip on error 
-            <Alert 
-              severity="success"
-              elevation={6}
-              variant="filled"  
-            >{flashMessage.message}</Alert>
+            >
+              {flashMessage}
+            </Alert>
           }
         </div>
       </Snackbar>

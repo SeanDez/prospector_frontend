@@ -38,9 +38,7 @@ export default ({ setRawInputString, setFlashMessage, firstName, lastName, compa
                 try {
                   const uiMessage = await submitter.addAndSometimesEmail();
                   setFlashMessage((uiMessage));
-                  if ('message' in uiMessage && textAreaRef.current) {
-                    textAreaRef.current.value = '';  
-                  }
+                  if (textAreaRef.current) { textAreaRef.current.value = ''; }
                 } catch (error) {
                   throw new Error(error);
                 }
