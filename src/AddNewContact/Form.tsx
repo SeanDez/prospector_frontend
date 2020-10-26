@@ -29,7 +29,7 @@ export default ({ setRawInputString, setFlashMessage, firstName, lastName, compa
           <LargeTextArea
             ref={textAreaRef}
             rows={8}
-            placeholder="John Doe  Acme Inc  S  mrjohnfredriskdoe@acmecorpinternational.com  and I see your alma mater was in the sigma kappa epsilon fraternity and Duke state university. That's so cool, my friend went there and I love that school!  acm  Linkedin"
+            placeholder="john doe  acme inc  s  mrjohnfredriskdoe@acmecorpinternational.com  Hi John! I see your alma mater was in the sigma kappa epsilon fraternity and Duke state university. That's so cool, my friend went there and I love that school!  ae"
             onChange={(e: any) => setRawInputString(e.target.value) }
             onKeyDown={async ({ ctrlKey, key }: any) => {
               if (ctrlKey && key === "Enter") {
